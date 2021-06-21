@@ -1,0 +1,37 @@
+﻿D:\VS2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (GlfwTezst.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  SoftBody.cpp
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.h(21,18): warning C4305: инициализация: усечение из "double" в "float"
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.h(30,10): warning C4305: инициализация: усечение из "double" в "float"
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(17,18): warning C4305: =: усечение из "double" в "float"
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(21,21): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(22,22): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(41,18): warning C4305: =: усечение из "double" в "float"
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(43,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(45,21): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(46,22): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(59,27): warning C4305: +=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(92,45): warning C4244: -=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(98,45): warning C4244: -=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(145,47): warning C4244: -=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\C++Projects\GLSL_Projects\GLSL_Projects\SoftBody.cpp(159,41): warning C4244: -=: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  GLSL_Projects.vcxproj -> D:\C++Projects\GLSL_Projects\Debug\GLSL_Projects.exe

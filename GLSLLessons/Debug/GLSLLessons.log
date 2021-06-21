@@ -1,0 +1,63 @@
+﻿  DissolveExample.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\DissolveExample.cpp(21,15): warning C4305: +=: усечение из "double" в "float"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\DissolveExample.cpp(40,55): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+  LightningBasics.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(78,18): warning C4305: +=: усечение из "double" в "float"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(131,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(132,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(139,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(140,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(147,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(148,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(155,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\LightningBasics.cpp(156,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+  Outline_and_ForceField_Example.cpp
+  PP_Bloom.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(173,43): warning C4305: аргумент: усечение из "double" в "GLclampf"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(259,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(260,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(267,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(268,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(275,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(276,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(283,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\PP_Bloom.cpp(284,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+  RayTracingSolution.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\RayTracingSolution.cpp(271,19): warning C4305: +=: усечение из "double" в "float"
+  RenderersHandler.cpp
+  Scene.cpp
+  SkyboxLesson.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(136,18): warning C4305: +=: усечение из "double" в "float"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(195,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(196,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(203,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(204,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(211,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(212,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(219,80): warning C4305: аргумент: усечение из "double" в "GLfloat"
+D:\C++Projects\GLSLLessons\GLSLLessons\Examples\cpps\SkyboxLesson.cpp(220,84): warning C4305: аргумент: усечение из "double" в "GLfloat"
+  Создание кода...
+  GLSLLessons.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(67,24): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(80,17): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(81,17): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(84,45): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(84,32): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(86,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+D:\C++Projects\GLSLLessons\GLSLLessons\GLSLLessons.cpp(87,13): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  CubeMeshPreset.cpp
+  Mesh.cpp
+  QuadMeshPreset.cpp
+  SphereMesh.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\Meshes\cpps\SphereMesh.cpp(5,22): warning C4305: инициализация: усечение из "double" в "float"
+D:\C++Projects\GLSLLessons\GLSLLessons\Meshes\cpps\SphereMesh.cpp(10,27): warning C4305: инициализация: усечение из "double" в "float"
+  Camera.cpp
+D:\C++Projects\GLSLLessons\GLSLLessons\RenderBase\cpps\Camera.cpp(10,23): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  ColorBuffer.cpp
+  CubemapTexture.cpp
+  DepthBuffer.cpp
+  MeshRenderer.cpp
+  ShaderProgram.cpp
+  Texture.cpp
+  Создание кода...
+  GLSLLessons.vcxproj -> D:\C++Projects\GLSLLessons\Debug\GLSLLessons.exe

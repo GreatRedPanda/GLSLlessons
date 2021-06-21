@@ -1,0 +1,255 @@
+// GlfwTezst.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//
+
+
+#include <glm.hpp>
+#include <gl/glew.h>
+#include <GLFW/glfw3.h>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
+#include <vector>
+#include <fstream> 
+#include <istream> 
+#include <iostream>
+#include <string>
+const char* computeSH = "\n\0";
+const char* vertexShaderSource = "#version 430 \n"
+"layout (location = 0) in vec4 aPos;\n"
+"uniform mat4 view;\n"
+"uniform mat4 projection;\n"
+"void main()\n"
+"{\n"
+
+"   gl_Position = projection*view*vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
+const char* fragmentShaderSource = "#version 430 \n"
+
+"void main()\n"
+"{\n"
+
+"   gl_FragColor = vec4(0.2,1,0.5, 1.0 );\n"
+"}\n\0";
+
+void processInput(GLFWwindow* window);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+// timing
+float deltaTime = 0.0f;	// time between current frame and last frame
+float lastFrame = 0.0f;
+float yaw=-90, pitch, lastX, lastY;
+bool firstMouse;
+
+
+
+
+int main()
+{
+
+   //==========================INIT WINDOW======================================================================
+    glfwInit();
+    GLFWwindow* window = glfwCreateWindow(720, 720, "LearnOpenGL", NULL, NULL);
+    if (window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    GLenum err = glewInit();
+   // glewInit();
+    //glEnable(GL_DEPTH_TEST);
+
+  //  glEnable(GL_BLEND);
+ //   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    std::string jsonLine;
+    std::string line;
+    std::ifstream in("blackHole.glsl"); // окрываем файл для чтения
+    if (in.is_open())
+    {
+       
+        while (getline(in, line))
+        {
+            jsonLine += line+"\n";
+        }
+    }
+    in.close();
+    computeSH = jsonLine.c_str();
+    int computeSh = glCreateShader(GL_COMPUTE_SHADER);
+    glShaderSource(computeSh, 1, &computeSH, NULL);
+
+
+    glCompileShader(computeSh);
+    int success;
+    char infoLog[512];
+    glGetShaderiv(computeSh, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(computeSh, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::COMPUTE::COMPILATION_FAILED\n" << infoLog << std::endl;
+    };
+
+    int shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, computeSh);
+    glLinkProgram(shaderProgram);
+ 
+   
+
+
+    int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+
+    int fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragShader);
+
+    int shaderVProgram = glCreateProgram();
+    glAttachShader(shaderVProgram, vertexShader);
+    glAttachShader(shaderVProgram, fragShader);
+    glLinkProgram(shaderVProgram);
+
+    glDeleteShader(computeSh);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragShader);
+    unsigned int modelLoc = glGetUniformLocation(shaderVProgram, "model");
+
+    unsigned int viewLoc = glGetUniformLocation(shaderVProgram, "view");
+    unsigned int projectionLoc = glGetUniformLocation(shaderVProgram, "projection");
+    int timeLoc= glGetUniformLocation(shaderProgram, "deltaT");
+  int  t = 0;
+  int   n = 5;
+  int   numParticles = n * n * n;
+
+    // init buffers with particle data
+    std::vector<glm::vec4> vb;
+    std::vector<glm::vec4> pb;
+    float             h = 2.0f / (n - 1);
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            for (int k = 0; k < n; k++)
+            {
+                glm::vec4    p(h * i - 1, h * j - 1, h * k - 1, 1);
+
+                pb.push_back(p);
+                vb.push_back(glm::vec4(0,0,0,0));
+            }
+    unsigned int VBO, VAO, EAO, NBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glEnableVertexAttribArray(0);
+    glBufferData(GL_ARRAY_BUFFER, numParticles * sizeof(glm::vec4), pb.data(), GL_DYNAMIC_DRAW);   
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4*sizeof(glm::vec4), (void*)0);
+    glBindVertexArray(0);
+
+    glGenBuffers(1, &NBO);
+    glBindBuffer(GL_ARRAY_BUFFER, NBO);
+    glBufferData(GL_ARRAY_BUFFER, numParticles * sizeof(glm::vec4), vb.data(), GL_DYNAMIC_DRAW);
+   
+    glm::mat4 projection = glm::mat4(1.0f);
+    projection = glm::perspective(glm::radians(45.0f), (float)720 / (float)720, 0.1f, 100.0f);
+
+    while (!glfwWindowShouldClose(window))
+    {
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+     
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+        processInput(window);
+        glm::mat4 view;
+        view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        double now = glfwGetTime();
+       glUniform1f(timeLoc, now);
+       glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, VBO);
+      glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, NBO);
+        glUseProgram(shaderProgram);
+     glDispatchCompute(numParticles / (1), 1, 1);
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+    
+       glUseProgram(shaderVProgram);
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+       
+        glBindVertexArray(VAO);
+        glPointSize(1.0f);
+        glDrawArrays(GL_TRIANGLES, 0, numParticles);
+
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        t = now;
+    }
+    glDeleteProgram(shaderProgram);
+    glDeleteProgram(shaderVProgram);
+    glfwTerminate();
+    return 0;
+}
+
+void processInput(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+    float cameraSpeed = 2.5 * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos += cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraPos -= cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos;
+    lastX = xpos;
+    lastY = ypos;
+
+    float sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw += xoffset;
+    pitch += yoffset;
+
+    if (pitch > 89.0f)
+        pitch = 89.0f;
+    if (pitch < -89.0f)
+        pitch = -89.0f;
+
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.y = sin(glm::radians(pitch));
+    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(direction);
+}
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
+}

@@ -1,0 +1,16 @@
+﻿  GlfwTezst.cpp
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\fluid.h(56,30): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\fluid.h(58,34): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\fluid.h(63,66): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\fluid.h(63,43): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(147,34): warning C4244: аргумент: преобразование "int" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(197,18): warning C4305: +=: усечение из "double" в "float"
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(221,28): warning C4305: аргумент: усечение из "double" в "GLfloat"
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(238,23): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(251,10): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\Office_1\source\repos\GlfwTezst — копия\GlfwTezst\GlfwTezst.cpp(252,10): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+  GlfwTezst.vcxproj -> C:\Users\Office_1\source\repos\GlfwTezst — копия\Debug\GlfwTezst.exe

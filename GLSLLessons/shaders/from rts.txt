@@ -1,0 +1,246 @@
+#version 430
+
+layout( local_size_x = 1, local_size_y = 1 ) in;
+layout (rgba32f, binding = 0) uniform image2D destTex;
+layout (rgba32f, binding = 1) uniform sampler2D skybox;
+const float pos_infinity = uintBitsToFloat(0x7F800000);
+const float PI = 3.14159265f;
+struct Ray
+{
+vec3 origin;
+vec3 direction;
+vec3 inverseDir;
+vec3 energy;
+uvec3 sign;
+};
+struct Camera
+{
+vec3 Position;
+vec3 Forward;
+mat4 View;
+mat4 Projection;
+mat4 Model;
+};
+struct RayHit
+{
+    vec3 position;
+    float distance;
+    vec3 normal;
+	
+};
+
+struct Object
+{
+vec3 Position;
+mat4 Model;
+};
+struct Light
+{
+vec3 Position;
+vec3 Color;
+};
+
+
+
+uniform Camera camera;
+uniform Light light;
+uniform Object objects[3];
+//uniform sampler2D skybox;
+
+RayHit CreateRayHit()
+{
+    RayHit hit;
+    hit.position = vec3(0.0f, 0.0f, 0.0f);
+    hit.distance = pos_infinity;
+    hit.normal = vec3(0.0f, 0.0f, 0.0f);
+    return hit;
+}
+Ray createRay(vec3 origin, vec3 direction)
+{
+    Ray ray;
+    ray.origin = origin;
+    ray.direction = direction;
+	
+	ray.inverseDir=vec3(1)/ray.direction;
+	ray.sign=uvec3(sign(ray.inverseDir));
+	ray.energy=vec3(1,1,1);
+    return ray;
+}
+float       intersectPlane(vec3 camera, vec3 dir) 
+{
+    vec3    normal = vec3(0, 1, 0);
+    float   n1 = dot(normal, camera);
+    float   n2 = dot(normal, dir);
+    float   d;
+
+    if (n2 == 0)
+        return -1.0;
+    d = -n1 / n2;
+    return (d < 0) ? -1.0 : d;
+}
+
+bool intersectCube(vec3 bounds[2], vec3 pos, Ray r, float t, inout RayHit hit)
+{
+//, out vec3 hit
+    hit.position = vec3(0.0f, 0.0f, 0.0f);
+    hit.distance = pos_infinity;
+   hit.normal = vec3(0.0f, 0.0f, 0.0f);
+ float tmin, tmax, tymin, tymax, tzmin, tzmax; 
+ 
+        tmin = (bounds[r.sign[0]].x - r.origin.x) * r.inverseDir.x; 
+        tmax = (bounds[1-r.sign[0]].x - r.origin.x) * r.inverseDir.x; 
+        tymin = (bounds[r.sign[1]].y - r.origin.y) * r.inverseDir.y; 
+        tymax = (bounds[1-r.sign[1]].y - r.origin.y) * r.inverseDir.y; 
+ 
+        if ((tmin > tymax) || (tymin > tmax)) 
+            return false; 
+ 
+        if (tymin > tmin) 
+        tmin = tymin; 
+        if (tymax < tmax) 
+        tmax = tymax; 
+ 
+        tzmin = (bounds[r.sign[2]].z - r.origin.z) * r.inverseDir.z; 
+        tzmax = (bounds[1-r.sign[2]].z - r.origin.z) * r.inverseDir.z; 
+ 
+        if ((tmin > tzmax) || (tzmin > tmax)) 
+            return false; 
+ 
+        if (tzmin > tmin) 
+        tmin = tzmin; 
+        if (tzmax < tmax) 
+        tmax = tzmax; 
+ 
+        t = tmin; 
+ 
+        if (t < 0) { 
+            t = tmax; 
+            if (t < 0) return false; 
+        } 
+ 
+        return true;
+}
+
+
+void trace()
+{
+
+
+}
+void main() 
+{
+    uint idx = gl_GlobalInvocationID.x;
+	ivec2 pos=ivec2(gl_GlobalInvocationID.xy);
+	vec4 color=vec4(pos.x/720.0,pos.y/720.0,0,1);
+	vec2 uv=vec2(pos.x/720.0,pos.y/720.0);
+
+
+
+    vec3 origin = (camera.Model*vec4(0.0f, 0.0f, 0.0f, 1.0f)).xyz;
+    vec3 direction = (inverse(camera.Projection)*vec4(uv, 0.0f, 1.0f)).xyz;
+    direction = (camera.View* vec4(direction, 0.0f)).xyz;
+    direction = normalize(direction);	
+    vec4 f=camera.Projection*camera.View*camera.Model*vec4(camera.Position, 1.0);
+    vec3 ps=vec3(camera.Model * vec4(camera.Position, 1.0));
+  
+  	Ray r=createRay(camera.Position, direction);
+	
+	for(int tries=0; tries<8; tries++)
+    {
+	RayHit hit=CreateRayHit();
+	  for(int i=0; i<objects.length(); i++)
+      {
+	       vec3 bounds[2];
+           bounds[0]=vec3(1,1,1)+objects[i].Position;
+           bounds[1]=vec3(-1,-1,-1)+objects[i].Position;		     
+           float t=0;
+           bool r=  intersectCube(bounds, objects[i].Position, r,t, hit );
+		 if(r)
+		 {
+		 color=vec4(direction,1);
+		 
+		 }
+		 else
+		 {
+		   float theta = acos(direction.y) / -PI;
+           float phi = atan(direction.x, -direction.z) / -PI * 0.5f;
+		   color = texture(skybox, vec2(theta, phi));
+		 }		 
+   
+	  }
+	   if (!any(ray.energy))
+        break;
+   }
+	imageStore(destTex, pos, color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bool intersectTriangle(Ray ray, inout RayHit bestHit, vec3 center, int idx, int objectID)
+{
+//camera.Projection*camera.View*
+vec3 v0=(objects[objectID].Model*vec4(vertecies[idx],1)).xyz;
+vec3 v1=(objects[objectID].Model*vec4(vertecies[idx+1],1)).xyz;
+vec3 v2=(objects[objectID].Model*vec4(vertecies[idx+2],1)).xyz;
+//vec3 v0=vertecies[idx]+center;
+//vec3 v1=vertecies[idx+1]+center;
+//vec3 v2=vertecies[idx+2]+center;
+
+
+vec3 e1=v1-v0;
+vec3 e2=v2-v0;
+vec3 pvec=cross(ray.direction, e2);
+float det=dot(e1, pvec);
+  if(det<0.00000008 && det>-0.00000008 )
+   return false;
+
+float inv_det=1.0/det;
+vec3 tvec=ray.origin-v0;
+float u=dot(tvec, pvec)*inv_det;
+
+  if(u<0 || u>1)
+   return false;
+
+vec3 qvec=cross(tvec, e1);
+float v=dot(ray.direction, qvec)*inv_det;
+
+  if(v<0 ||u+v>1)
+   return false;
+   
+   float distance=dot(e2, pvec);
+   distance=inv_det*dot(e2,qvec);
+   
+   vec3 normal=cross(v1-v0, v2-v0);
+   float nDotRayDir=dot(normal, ray.direction);
+   float t=(dot(normal, ray.origin)+dot(normal, v0))/nDotRayDir;
+   //distance=t;
+    if (distance > 0.000000008 )
+    {   
+if(distance<bestHit.distance)	
+	  { 
+	  
+	  bestHit.distance = distance;
+       bestHit.position = ray.origin + distance * ray.direction;
+       bestHit.normal = pvec;
+	   }
+	   //cross(v1-v0, v2-v0)
+     }
+  return true;
+}

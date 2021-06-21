@@ -1,0 +1,24 @@
+	//Collisions with the screen edges
+	if(p.x < 0.0f) {
+		v.x = -v.x * 0.5f;
+		p.x = -p.x;
+	}
+	else if(p.x > SCREEN_WIDTH) 
+	{
+		v.x = -v.x * 0.5f;
+		p.x = SCREEN_WIDTH * 2.0f - p.x;
+	}
+	if(p.y > SCREEN_HEIGHT) {
+		v.y = -v.y * 0.5f;
+		p.y = SCREEN_HEIGHT * 2.0f - p.y;
+	}
+	 if(p.y <0.0f) {
+		v.y = -v.y * 0.5f;
+		p.y =  - p.y;
+	}
+	
+	
+	layout(std140, binding = 1) uniform  Vel 
+{
+    vec2 velocity [];
+};

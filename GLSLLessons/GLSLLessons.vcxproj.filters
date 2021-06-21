@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{a4456bd8-eb4e-41f6-a822-988c74e226fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\RenderBase">
+      <UniqueIdentifier>{c831a5eb-79f5-42a8-b242-5a54ff60cba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Examples">
+      <UniqueIdentifier>{aab37744-5d8d-441d-8c42-bfa60d1af5f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Physics">
+      <UniqueIdentifier>{0cb2daef-3e56-4b8a-8eee-19ca4359f791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Examples\headers">
+      <UniqueIdentifier>{c25a607f-e515-437b-8db1-0c67a2db77e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Examples\cpps">
+      <UniqueIdentifier>{0f9b7048-235a-4a37-84ce-3c6fc9ca7798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\RenderBase\cpps">
+      <UniqueIdentifier>{f84c8a22-1ac9-4beb-8216-44cc5c121eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\RenderBase\headers">
+      <UniqueIdentifier>{87824e90-bcd5-4dde-a7ff-8a4909efc20a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Meshes">
+      <UniqueIdentifier>{94add717-84ec-4959-b52d-0eb6b4157486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Meshes\cpps">
+      <UniqueIdentifier>{252d0f15-7be0-4437-a960-c276931cbbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Meshes\headers">
+      <UniqueIdentifier>{2c7541be-6f83-4eb5-a38a-05a8d55ac4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Core">
+      <UniqueIdentifier>{9feec2a5-d456-433c-8308-7d2c6adffae3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GLSLLessons.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\DissolveExample.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\LightningBasics.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\Outline_and_ForceField_Example.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\PP_Bloom.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\RayTracingSolution.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\RenderersHandler.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\Scene.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\cpps\SkyboxLesson.cpp">
+      <Filter>Исходные файлы\Examples\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\cpps\CubeMeshPreset.cpp">
+      <Filter>Исходные файлы\Meshes\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\cpps\Mesh.cpp">
+      <Filter>Исходные файлы\Meshes\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\cpps\QuadMeshPreset.cpp">
+      <Filter>Исходные файлы\Meshes\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes\cpps\SphereMesh.cpp">
+      <Filter>Исходные файлы\Meshes\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\Camera.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\ColorBuffer.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\CubemapTexture.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\DepthBuffer.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\MeshRenderer.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\ShaderProgram.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderBase\cpps\Texture.cpp">
+      <Filter>Исходные файлы\RenderBase\cpps</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitySerializable.cpp">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviour.cpp">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Definitions.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\headers\DissolveExample.h">
+      <Filter>Исходные файлы\Examples\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\headers\Outline_and_ForceField_Example.h">
+      <Filter>Исходные файлы\Examples\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\headers\RenderersHandler.h">
+      <Filter>Исходные файлы\Examples\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\headers\Scene.h">
+      <Filter>Исходные файлы\Examples\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\headers\CubeMeshPreset.h">
+      <Filter>Исходные файлы\Meshes\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\headers\Mesh.h">
+      <Filter>Исходные файлы\Meshes\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\headers\QuadMeshPreset.h">
+      <Filter>Исходные файлы\Meshes\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Meshes\headers\SphereMesh.h">
+      <Filter>Исходные файлы\Meshes\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\Camera.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\ColorBuffer.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\CubemapTexture.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\DepthBuffer.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\MeshRenderer.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\RenderingStage.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\ShaderProgram.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\Texture.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderBase\headers\OpenGLHeaders.h">
+      <Filter>Исходные файлы\RenderBase\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GLSLLessons.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fluid.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\vertex.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

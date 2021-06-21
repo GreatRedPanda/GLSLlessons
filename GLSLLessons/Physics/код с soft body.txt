@@ -1,0 +1,147 @@
+#include "SoftBody.h"
+
+#define clamp(x,y,z) (((x<y)?y:x)>z)?z:((x<y)?y:x)
+
+#define distance(a,b) (a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)
+SoftBody::SoftBody()
+{
+    velocity.x = -0.00001;
+    centerPosition.x = 0.2;
+    centerPosition.y = 0.1;
+    float radius = 0.2;
+   for (int i = 0; i < 360; i+=10)
+  {
+      float angle = i * 3.1415 / 180;
+      float angle2 = (i - 1) * 3.1415 / 180;
+
+      float x2 = centerPosition.x+radius * cos(angle);
+      float y2 = centerPosition.y + radius * sin(angle);
+
+      positions.push_back(glm::vec2(x2, y2));
+      velocities.push_back(glm::vec2(0, 0));
+  }
+}
+
+void SoftBody::simulate()
+{
+    
+ 
+    velocity.y += -0.000000009;
+    centerPosition += velocity;
+   // checkCollisions();
+   checkBounds();
+ float   pr = 0;
+    for (size_t i = 0; i < positions.size(); i++)
+    {
+        float length = distance(positions[i], centerPosition);
+
+        if (length < (bodyRadius)* (bodyRadius )/2)
+            pr++;
+        float angle = i*10 * 3.1415 / 180;
+        float angle2 = (i*10- 1) * 3.1415 / 180;
+        float x2 = centerPosition.x + bodyRadius * cos(angle);
+        float y2 = centerPosition.y + bodyRadius * sin(angle);
+        glm::vec2 stablePos=  glm::vec2(x2, y2);
+
+        velocities[i]= velocity;
+        
+
+       
+        velocities[i] -= (positions[i] - stablePos) * glm::vec2(0.00008, 0.00008);
+
+        if(positions[i].y+velocities[i].y>-1
+            
+            && positions[i].y + velocities[i].y < 1
+            &&
+            positions[i].x + velocities[i].x>-1
+
+            && positions[i].x + velocities[i].x < 1
+            )
+           positions[i] += velocities[i];
+        else
+        {
+        }
+    }
+    pressure = pr;
+}
+
+void SoftBody::draw()
+{
+  //  glClearColor(1.0, 1.0, 1.0, 1.0);
+
+    glPointSize(4.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    glBegin(GL_POINTS);
+    glColor3f(1.0, 1.0, 0.0);
+    glVertex2f(centerPosition.x, centerPosition.y);
+    for (size_t i = 0; i < positions.size(); i++)
+    {
+        glColor3f(1.0, 0.0, 0.0);
+        glVertex2f(positions[i].x, positions[i].y);
+
+    }
+    glEnd();
+    glFlush();
+}
+
+void SoftBody::checkCollisions()
+{
+
+
+
+    for (size_t i = 0; i < positions.size(); i++)
+    {
+        glm::vec2 sumVel = glm::vec2(0, 0);
+        for (size_t j = 0; j < positions.size(); j++)
+        {
+            if (i == j)
+                continue;
+          float length=  distance(positions[i], positions[j]);
+          float radiusePercent = length / 0.2;
+          if (radiusePercent < 0.1)
+          {
+
+              //velocities[j] = velocities[i] *glm::vec2(0.8, 0.8);
+              sumVel += (positions[i]- positions[j]) ;
+          }
+          else if(radiusePercent>2)
+
+          {
+              sumVel -= (positions[i] - positions[j]);
+          }
+        }
+        velocities[i] = sumVel * glm::vec2(0.00008, 0.00008);
+
+       // velocities[i].y += -0.00009;
+    }
+
+
+}
+void SoftBody::checkBounds()
+{
+    if (centerPosition.y <= -1 )
+    {
+        if( pressure > 16)
+        velocity.y = -velocity.y;
+        else
+        {
+            centerPosition.y = -1;
+        }
+    }
+    if (centerPosition.y >= 1)
+    {
+        if (pressure > 16)
+            velocity.y = -velocity.y;
+        else
+        {
+            centerPosition.y = 1;
+        }
+    }
+
+
+
+
+
+}
